@@ -87,13 +87,16 @@ for _ in tqdm(range(2553),desc='Scraping and Creating a Pandas DataFrame',colour
         jbt.append(np.nan)
         pass
     # organisation
-    org.append(doc.find(class_='RP7SMd').span.text)
+    try:
+        org.append(doc.find(class_='RP7SMd').span.text)
+    except AttributeError:
+        org.append(np.nan)
     # location
     loc.append(doc.find(class_='r0wTof').text)
     # experience
     try:
         exp.append(doc.find(class_='wVSTAb').text)
-    except AttributeError as e:
+    except AttributeError:
         exp.append(doc.find_all(class_='RP7SMd')[-1].span.text)
     # remote eligibility
     if len(doc.find_all(class_='RP7SMd')) != 1:
