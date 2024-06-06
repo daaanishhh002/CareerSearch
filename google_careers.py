@@ -56,7 +56,7 @@ col_names = ['Job Title','Organisation','Location','Experience',
 google_jobs_df = pd.DataFrame(columns=col_names)
 
 # scraping job data and collecting in dataframe
-for _ in tqdm(range(2553),desc='Scraping and Creating a Pandas DataFrame',colour='#A020F0',ascii=True):
+for _ in tqdm(range(len(rel_urls)),desc='Scraping and Creating a Pandas DataFrame',colour='#A020F0',ascii=True):
 
     job_url = main_url + rel_urls_s[_]
     response = requests.get(job_url)
