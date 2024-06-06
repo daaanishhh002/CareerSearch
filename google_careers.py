@@ -97,7 +97,10 @@ for _ in tqdm(range(len(rel_urls)),desc='Scraping and Creating a Pandas DataFram
     try:
         exp.append(doc.find(class_='wVSTAb').text)
     except AttributeError:
-        exp.append(doc.find_all(class_='RP7SMd')[-1].span.text)
+        try:
+            exp.append(doc.find_all(class_='RP7SMd')[-1].span.text)
+        except IndexError:
+            exp.append(np.nan)
     # remote eligibility
     if len(doc.find_all(class_='RP7SMd')) != 1:
         if doc.find_all(class_='RP7SMd')[1].span.text.lower() == 'remote eligible':
