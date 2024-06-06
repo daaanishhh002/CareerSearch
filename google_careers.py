@@ -81,7 +81,11 @@ for _ in tqdm(range(2553),desc='Scraping and Creating a Pandas DataFrame',colour
     }
 
     # job title
-    jbt.append(doc.find(class_='p1N2lc').text)
+    try:
+        jbt.append(doc.find(class_='p1N2lc').text)
+    except AttributeError:
+        jbt.append(np.nan)
+        pass
     # organisation
     org.append(doc.find(class_='RP7SMd').span.text)
     # location
